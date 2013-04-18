@@ -1,11 +1,13 @@
 /**
  * Config: Database
  */
-module.exports = function (app, express, mongoose) {
+module.exports = function (app, express, mysql) {
 
-	mongoose.set('host',      'localhost');
-	mongoose.set('name',      'example');
-	mongoose.set('auth user', '');
-	mongoose.set('auth pass', '');
+	mysql._config = {
+		host: 'localhost',
+		user: 'root',
+		password: '123456',
+		dbName: 'webservice'
+	};
 
 }

@@ -1,6 +1,8 @@
 /**
  * DB Model: Example
  */
+ 
+// @TODO: adjust the model
 module.exports = function(mongoose, validator) {
 
 	var collection = 'User';

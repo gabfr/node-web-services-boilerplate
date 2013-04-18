@@ -1,6 +1,7 @@
 /**
  * Routes: Example
  */
+// @TODO: adjust the model
 module.exports = function (app, models) {
 
 	app.post('/example', function (req, res) {

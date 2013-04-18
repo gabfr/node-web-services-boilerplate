@@ -10,7 +10,7 @@ var fs      = require('fs');
 var path    = require('path');
 var colors  = require('colors');
 
-module.exports = function(app, express, mongoose) {
+module.exports = function(app, express, mysql) {
 
 	/**
 	 * Configuration
@@ -18,7 +18,7 @@ module.exports = function(app, express, mongoose) {
 
 	fs.readdirSync(CONFIG_DIR).forEach(function (file) {
 		var pathname = CONFIG_DIR + '/' + file;
-		require(pathname)(app, express, mongoose);
+		require(pathname)(app, express, mysql);
 		console.log('Loaded: '.green + pathname);
 	});
 
@@ -28,7 +28,7 @@ module.exports = function(app, express, mongoose) {
 	var models = {};
 	fs.readdirSync(MODELS_DIR).forEach(function (file) {
 		var pathname = MODELS_DIR + '/' + file;
-		models[ path.basename(file, '.js') ] = require(pathname)(mongoose);
+		models[ path.basename(file, '.js') ] = require(pathname)(mysql);
 		console.log('Loaded: '.green + pathname);
 	});
 

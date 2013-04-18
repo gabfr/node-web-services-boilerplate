@@ -3,7 +3,7 @@
  */
 var http      = require('http');
 var express   = require('express');
-var mongoose  = require('mongoose');
+var mysql 	  = require('mysql');
 var socketio  = require('socket.io');
 
 /**
@@ -24,30 +24,21 @@ process.on('uncaughtException', function(err) {
 /**
  * Load Resources
  */
-require('./bootstrap')(app, express, mongoose);
+require('./bootstrap')(app, express, mysql);
 
 /**
  * DB Connection
  */
-var db = mongoose.connect(
-	mongoose.get('host'),
-	mongoose.get('name'),
-	{
-		user : mongoose.get('auth user'),
-		pass : mongoose.get('auth pass')
-	}
-);
+var dbPool = mysql.createPool(mysql._config);
 
-mongoose.connection.on('error', function(err) {
-	console.log('Error: '.red + err);
-	process.exit(1);
+var port = app.get('system port');
+server.listen(port);
+console.log(app.get('app title').cyan + ' started on port ' + port.toString().cyan);
+/*
+how should use?
+dbPool.getConnection(function(err, conn) {
+	conn.query('USE ' + mysql.escapeId(mysql._config.dbName), function(err, res) {
+		
+	});
 });
-
-mongoose.connection.on('connected', function() {
-	/**
-	 * Start!
-	 */
-	var port = app.get('system port');
-	server.listen( port );
-	console.log(app.get('app title').cyan + ' started on port ' + port.toString().cyan);
-});
+*/

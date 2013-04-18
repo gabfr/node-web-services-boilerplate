@@ -1,7 +1,7 @@
 /**
  * Config: Middleware
  */
-module.exports = function (app, express, mongoose) {
+module.exports = function (app, express, mysql) {
 
 	app.use(express.bodyParser());
 	app.use(app.router);
