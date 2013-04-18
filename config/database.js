@@ -1,9 +1,9 @@
 /**
  * Config: Database
  */
-module.exports = function (app, express, mysql) {
+module.exports = function (app, express, db) {
 
-	mysql._config = {
+	db.config = {
 		host: 'localhost',
 		user: 'root',
 		password: '123456',

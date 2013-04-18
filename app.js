@@ -13,6 +13,12 @@ var app      = express();
 var server   = http.createServer(app);
 var io       = socketio.listen(server)
 
+var db = {
+	mysql: mysql,
+	config: null,
+	pool: null
+};
+
 /**
  * uncaughtException handler
  */
@@ -24,12 +30,9 @@ process.on('uncaughtException', function(err) {
 /**
  * Load Resources
  */
-require('./bootstrap')(app, express, mysql);
+require('./bootstrap')(app, express, db);
 
-/**
- * DB Connection
- */
-var dbPool = mysql.createPool(mysql._config);
+
 
 var port = app.get('system port');
 server.listen(port);

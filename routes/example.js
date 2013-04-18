@@ -2,16 +2,15 @@
  * Routes: Example
  */
 // @TODO: adjust the model
-module.exports = function (app, models) {
+module.exports = function (app, models, db) {
 
-	app.post('/example', function (req, res) {
-
-		var user = new models.Example({
-			name : req.body.name
+	app.get('/user', function(req, res) {
+		db.pool.getConnection(function(err, conn) {
+			models.Example.loadAll(conn, function(rows) {
+				res.send(rows);
+				conn.end();
+			});
 		});
-
-		user.save();
-
 	});
 
 }

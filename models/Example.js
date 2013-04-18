@@ -3,19 +3,17 @@
  */
  
 // @TODO: adjust the model
-module.exports = function(mongoose, validator) {
+module.exports = function(mysql, validator) {
 
-	var collection = 'User';
+	var Example = function() {
+		this.loadAll = function(conn, _cb) {
+			var self = this;
+			conn.query('SELECT * FROM user', function (err, rows) {
+				_cb.call(self, rows);
+			});
+		};
+	};
 
-	/**
-	 * Schema
-	 */
-	var schema = new mongoose.Schema({
-		name : {
-			type     : String
-		}
-	});
-
-	return mongoose.model(collection, schema);
+	return Example;
 
 };
