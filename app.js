@@ -3,8 +3,8 @@
  */
 var http      = require('http');
 var express   = require('express');
-var mysql 	  = require('mysql');
 var socketio  = require('socket.io');
+var Sequelize = require('sequelize'); // @TODO: Adapt all app to use Sequelize as ORM framework.
 
 /**
  * Init
@@ -14,7 +14,7 @@ var server   = http.createServer(app);
 var io       = socketio.listen(server)
 
 var db = {
-	mysql: mysql,
+	mysql: Sequelize,
 	config: null,
 	pool: null
 };
